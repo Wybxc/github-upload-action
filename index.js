@@ -2,11 +2,13 @@ const fs = require('fs')
 const path = require('path')
 const upload = require('./upload.js')
 const core = require('@actions/core')
+const github = require('@actions/github')
 const checkBranch = require('./checkBranch.js')
+
 const inputPath = core.getInput('file-path')
 const inputRemoteDir = core.getInput('remote-dir')
-const inputOwner = core.getInput('owner')
-const inputRepo = core.getInput('repo')
+const inputOwner = core.getInput('owner') || github.context.repo.owner
+const inputRepo = core.getInput('repo') || github.context.repo.repo
 const commitMessage = core.getInput('commit-message')
 const branchName = core.getInput('branch-name')
 const token = core.getInput('access-token')
